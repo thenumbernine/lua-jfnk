@@ -1,5 +1,5 @@
 local table = require 'ext.table'
-local gmres = require 'LinearSolvers.cl.gmres'
+local gmres = require 'solver.cl.gmres'
 
 --[[
 performs update of iteration x[n+1] = x[n] - (dF/dx)^-1 F(x[n])

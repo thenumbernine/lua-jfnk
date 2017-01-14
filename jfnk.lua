@@ -1,5 +1,5 @@
 local table = require 'ext.table'
-local GMRes = require 'LinearSolvers.GeneralizedMinimalResidual'
+local gmres = require 'solver.gmres'
 --[[
 performs update of iteration x[n+1] = x[n] - (dF/dx)^-1 F(x[n])
 
@@ -102,7 +102,7 @@ local function jfnk(args)
 
 		-- solve dx = (dF/dx)^-1 F(x) via iterative (dF/dx) dx = f(x)
 		-- use jfnk approximation for dF/dx * dx
-		dx = GMRes(table(gmresArgs, {
+		dx = gmres(table(gmresArgs, {
 			x0 = dx,
 			A = function(dx)
 				return (f(x + dx * jfnkEpsilon) - f(x - dx * jfnkEpsilon)) / (2 * jfnkEpsilon)
